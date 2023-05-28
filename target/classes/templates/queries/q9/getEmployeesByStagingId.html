@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+</head>
+
+<head>
+    <title>Employees</title>
+    <div style="text-align: center;">Постановщики и актеры</div>
+    <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
+</head>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th> </th>
+        <th>id</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <td>Режиссер</td>
+    <td>
+        <a th:href="@{/people/{employeeId}(employeeId=${director.employeeId})}"
+           th:text="${director.employeeId}"></a>
+    </td>
+    <td th:text="${director.firstName}"></td>
+    <td th:text="${director.lastName}"></td>
+    </tbody>
+    <tbody>
+    <td>Художник-постановщик</td>
+    <td>
+        <a th:href="@{/people/{employeeId}(employeeId=${artDirector.employeeId})}"
+           th:text="${artDirector.employeeId}"></a>
+    </td>
+    <td th:text="${artDirector.firstName}"></td>
+    <td th:text="${artDirector.lastName}"></td>
+    </tbody>
+    <tbody>
+    <td>Дирижер</td>
+    <td>
+        <a th:href="@{/people/{employeeId}(employeeId=${conductor.employeeId})}"
+           th:text="${conductor.employeeId}"></a>
+    </td>
+    <td th:text="${conductor.firstName}"></td>
+    <td th:text="${conductor.lastName}"></td>
+    </tbody>
+    <tbody>
+    <tr th:each="actor : ${actorsList}">
+        <td>Актер</td>
+        <td>
+            <a th:href="@{/people/{employeeId}(employeeId=${actor.employeeId})}"
+               th:text="${actor.employeeId}"></a>
+        </td>
+        <td th:text="${actor.firstName}"></td>
+        <td th:text="${actor.lastName}"></td>
+    </tr>
+    </tbody>
+    <tbody>
+    <tr th:each="backupActor : ${backupActorsList}">
+        <td>Запасной актер</td>
+        <td>
+            <a th:href="@{/people/{employeeId}(employeeId=${backupActor.employeeId})}"
+               th:text="${backupActor.employeeId}"></a>
+        </td>
+        <td th:text="${backupActor.firstName}"></td>
+        <td th:text="${backupActor.lastName}"></td>
+    </tr>
+    </tbody>
+</table>
+</html>

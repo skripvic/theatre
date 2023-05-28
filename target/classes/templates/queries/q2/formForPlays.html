@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<head>
+  <title>Employees</title>
+  <div style="text-align: center;">Спектакли</div>
+  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
+</head>
+<body>
+<div class="card-body p-4 p-md-5">
+  <form th:action="@{/queries/q2-2}" th:object="${FormForPlaysRequest}" method="get">
+    <div class="row">
+      <div style="display: flex; align-items: center;">
+        <label class="form-label" for="isStaged" style="margin-right: 5px;">Поставленные когда-либо</label>
+        <input type="checkbox" th:field="*{isStaged}" th:value="true" id="isStaged" style="vertical-align: middle;">
+      </div>
+    </div>
+    <div class="row">
+      <div style="display: flex; align-items: center;">
+        <label class="form-label" for="thisSeason" style="margin-right: 5px;">В этом сезоне </label>
+        <input type="checkbox" th:field="*{thisSeason}" th:value="true" id="thisSeason" style="vertical-align: middle;">
+      </div>
+    </div>
+    <div class="row">
+      <div style="display: flex; align-items: center;">
+        <label class="form-label" for="alreadyShown" style="margin-right: 5px;">Уже показанные </label>
+        <input type="checkbox" th:field="*{alreadyShown}" th:value="true" id="alreadyShown" style="vertical-align: middle;">
+      </div>
+    </div>
+    <div class="row">
+      <label class="form-label" for="genreId">Жанр (id)</label>
+      <input th:field="*{genreId}" type="number" id="genreId" class="form-control form-control-lg"/>
+    </div>
+    <div class="row">
+      <label class="form-label" for="century">В промежутке от (yyyy.mm.dd)</label>
+      <input th:field="*{fromDate}" type="text" id="century" class="form-control form-control-lg"/>
+    </div>
+    <div class="row">
+      <label class="form-label" for="toDate">До (yyyy.mm.dd)</label>
+      <input th:field="*{toDate}" type="text" id="toDate" class="form-control form-control-lg"/>
+    </div>
+    <div class="row">
+      <label class="form-label" for="centuryOfCreation">Век создания спектакля</label>
+      <input th:field="*{centuryOfCreation}" type="text" id="centuryOfCreation" class="form-control form-control-lg"/>
+    </div>
+    <div class="row">
+      <label class="form-label" for="toDate">Автор (id)</label>
+      <input th:field="*{authorId}" type="text" id="authorId" class="form-control form-control-lg"/>
+    </div>
+    <input type="submit" value="Поиск"/>
+  </form>
+</div>
+</body>
+</html>

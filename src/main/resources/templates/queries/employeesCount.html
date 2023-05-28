@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+</head>
+
+<head>
+    <title>Employees</title>
+    <div style="text-align: center;">Работники</div>
+    <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
+</head>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Должность</th>
+        <th>Количество</th>
+    </tr>
+    </thead>
+    <tbody>
+    <td>Актеры</td>
+    <td th:text="${actorCount}"></td>
+    </tbody>
+    <tbody>
+    <td>Постановщики</td>
+    <td th:text="${musicianCount}"></td>
+    </tbody>
+    <tbody>
+    <td>Музыканты</td>
+    <td th:text="${stageWorkerCount}"></td>
+    </tbody>
+    <tbody>
+    <td>Служащие</td>
+    <td th:text="${generalWorkerCount}"></td>
+    </tbody>
+    <tbody>
+    <td>Всего работников</td>
+    <td th:text="${employeeCount}"></td>
+    </tbody>
+</table>
+</html>
