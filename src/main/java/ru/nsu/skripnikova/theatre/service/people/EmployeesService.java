@@ -37,6 +37,10 @@ public class EmployeesService {
         return employeesRepository.getEmployeesByPositionId(4);
     }
 
+    public Integer getNextEmployeesId(){
+        return employeesRepository.getNextEmployeesId();
+    }
+
     public void addEmployees (EmployeesRequest employeesRequest) throws ParseException {
         Integer nextVal = employeesRepository.getNextEmployeesId();
         Date birthDate = formatDateFromString(employeesRequest.getBirthDate());
@@ -87,6 +91,36 @@ public class EmployeesService {
             //throw not found exception
         }
         employees.setEmployeeId(employeeId);
+        employeesRepository.save(employees);
+    }
+
+    private Employees getUpdated(EmployeesRequest employeesRequest, Integer employeeId) throws ParseException {
+        String birthDate = employeesRequest.getBirthDate();
+        String firstWorkDay = employeesRequest.getFirstWorkDay();
+        String lastWorkDay = employeesRequest.getLastWorkDay();
+        Employees prevEmployee = getEmployees(employeeId);
+        return new Employees(
+                employeeId,
+                employeesRequest.getFirstName().isEmpty() ? prevEmployee.getFirstName() : employeesRequest.getFirstName(),
+                employeesRequest.getLastName().isEmpty() ? prevEmployee.getLastName() : employeesRequest.getLastName(),
+                employeesRequest.getSex().isEmpty() ? prevEmployee.getSex() : employeesRequest.getSex(),
+                birthDate.isEmpty() ? prevEmployee.getBirthDate() : formatDateFromString(birthDate),
+                employeesRequest.getNumberOfChildren() == null ? prevEmployee.getNumberOfChildren() : employeesRequest.getNumberOfChildren(),
+                employeesRequest.getSalary() == null ? prevEmployee.getSalary() : employeesRequest.getSalary(),
+                firstWorkDay.isEmpty() ? prevEmployee.getFirstWorkDay() : formatDateFromString(firstWorkDay),
+                lastWorkDay.isEmpty() ? prevEmployee.getLastWorkDay() : formatDateFromString(lastWorkDay),
+                prevEmployee.getPositionId(),
+                employeesRequest.getIsStudent() == null ? prevEmployee.getIsStudent() : employeesRequest.getIsStudent()
+        );
+    }
+
+    public void updateEmployees(EmployeesRequest employeesRequest, Integer employeeId) {
+        Employees employees;
+        try {
+            employees = getUpdated(employeesRequest, employeeId);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         employeesRepository.save(employees);
     }
 

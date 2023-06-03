@@ -9,6 +9,7 @@ import ru.nsu.skripnikova.theatre.repository.repertoire.AuthorsRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class AuthorsService {
         if (formForAuthorsRequest.getCountry() == null){
             country = null;
         }
-        return authorsRepository.getAuthorsByFields(genreId, century, country);
+        return new ArrayList<>(authorsRepository.getAuthorsByFields(genreId, century, country));
     }
 
 }

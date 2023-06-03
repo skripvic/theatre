@@ -25,7 +25,7 @@
     <th>Дата увольнения</th>
     <th>Зарплата</th>
     <th>Является ли студентом</th>
-<!--    <th>Тип</th>-->
+    <th>Тип</th>
   </tr>
   </thead>
   <tbody>
@@ -39,10 +39,7 @@
   <td th:text="${lastWorkDay}"></td>
   <td th:text="${salary}"></td>
   <td th:text="${isStudent}"></td>
-<!--  <td>-->
-<!--    <a th:href="@{/staff/staff_type/{staffTypeId} (staffTypeId=${staffType})}"-->
-<!--       th:text="${staffType}"></a>-->
-<!--  </td>-->
+  <td th:text="${positionId}"></td>
   </tbody>
 </table>
 
@@ -52,10 +49,10 @@
   }
 </style>
 
-<form class="center" th:action="@{/staff/deleteStaff/{staffId} (staffId=${id})}" method="post">
+<form class="center" th:action="@{/people/deleteEmployee/{employeeId} (employeeId=${employeeId})}" method="post">
   <input type="submit" class="center" value="Удалить"/>
 </form>
-<form class="center" th:action="@{/staff/getUpdateStaff/{staffId} (staffId=${id})}" method="get">
+<form class="center" th:action="@{/people/updateEmployee/{employeeId} (employeeId=${employeeId})}" method="get">
   <input type="submit" class="center" value="Изменить"/>
 </form>
 

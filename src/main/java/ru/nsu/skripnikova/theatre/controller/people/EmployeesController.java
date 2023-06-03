@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.nsu.skripnikova.theatre.controller.requests.*;
 import ru.nsu.skripnikova.theatre.entity.people.Employees;
-import ru.nsu.skripnikova.theatre.entity.repertoire.Authors;
 import ru.nsu.skripnikova.theatre.service.people.EmployeesService;
 
+import java.beans.Transient;
 import java.text.ParseException;
 import java.util.List;
 
@@ -32,8 +32,25 @@ public class EmployeesController {
     @PostMapping(value = "people/addEmployeesPost")
     public String addEmployees(@ModelAttribute("employeesRequest") EmployeesRequest employeesRequest) throws ParseException {
         employeesService.addEmployees(employeesRequest);
+//        if (employeesRequest.getPositionId() == 1) {
+//            Integer employeeId = employeesService.getNextEmployeesId();
+//            return "people/addActors/{employeeId}";
+//        }
         return "redirect:allEmployees";
     }
+
+//    @GetMapping(value = "people/addActors/{employeeId}")
+//    public String addActors(@PathVariable(name = "employeeId") Integer employeeId, Model model) {
+//        model.addAttribute("actorsRequest", new ActorsRequest());
+//        return "people/addActors";
+//    }
+
+//
+//    @PostMapping(value = "people/addActorsPost")
+//    public String addActorsPost(@ModelAttribute("actorsRequest") ActorsRequest actorsRequest) throws ParseException {
+//        actorsService.addActors(actorsRequest);
+//        return "redirect:allEmployees";
+//    }
 
     @GetMapping(value = "people/getActors")
     public String getActors(Model model) {
@@ -68,6 +85,41 @@ public class EmployeesController {
         return new ResponseEntity<>(employeesService.getEmployees(employeeId) , HttpStatus.OK);
     }
 
+    @Transient
+    @PostMapping(value = "people/deleteEmployee/{employeeId}")
+    public String deleteEmployee(@PathVariable(name = "employeeId") Integer employeeId) {
+        employeesService.deleteEmployees(employeeId);
+        return "redirect:/people/allEmployees";
+    }
+
+    @GetMapping(value = "/people/updateEmployee/{employeeId}")
+    public String getStaffUpdate(@PathVariable(name = "employeeId") Integer employeeId, Model model) {
+        model.addAttribute("employeeRequest", new EmployeesRequest());
+        model.addAttribute("id", employeeId);
+        return "people/updateEmployee";
+    }
+
+    @PostMapping(value = "people/updateEmployeePost/{employeeId}")
+    public String updateEmployees(@PathVariable(name = "employeeId") Integer employeeId,
+                              @ModelAttribute("employeeRequest") EmployeesRequest employeesRequest) {
+        employeesService.updateEmployees(employeesRequest, employeeId);
+        return "redirect:/people/allEmployees";
+    }
+
+    @GetMapping(value = "people/updateEmployeePost/allEmployees")
+    public String getAllEmployees1(Model model) {
+        List<Employees> employeesList = employeesService.getAllEmployees();
+        model.addAttribute("employeesList", employeesList);
+        return "people/employees";
+    }
+
+    @GetMapping(value = "people/deleteEmployee/allEmployees")
+    public String getAllEmployees2(Model model) {
+        List<Employees> employeesList = employeesService.getAllEmployees();
+        model.addAttribute("employeesList", employeesList);
+        return "people/employees";
+    }
+
     @GetMapping(value = "people/allEmployees")
     public String getAllEmployees(Model model) {
         List<Employees> employeesList = employeesService.getAllEmployees();
@@ -98,7 +150,7 @@ public class EmployeesController {
         List<Integer> employeesAgesList = employeesService.getEmployeesAgesQ1();
         model.addAttribute("employeesList", employeesList);
         model.addAttribute("employeesAgesList", employeesAgesList);
-        return "queries/employees";
+        return "queries/q1/employees";
     }
 
     @GetMapping(value = "queries/q1-2")
@@ -113,7 +165,7 @@ public class EmployeesController {
         model.addAttribute("stageWorkerCount", stageWorkersCount);
         model.addAttribute("generalWorkerCount", generalWorkersCount);
         model.addAttribute("employeeCount", employeesCount);
-        return "queries/employeesCount";
+        return "queries/q1/employeesCount";
     }
 
     @GetMapping(value = "queries/q6-1")

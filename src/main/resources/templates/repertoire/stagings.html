@@ -28,10 +28,11 @@
   <tbody>
   <tr th:each="staging:${stagingsList}">
     <td th:text="${staging.stagingId}"></td>
-    <td>
-      <a th:href="@{/repertoire/{playId} (stagingsId=${staging.playId})}"
-         th:text="${staging.playId}"></a>
-    </td>
+<!--    <td>-->
+<!--      <a th:href="@{/repertoire/{playId} (stagingsId=${staging.playId})}"-->
+<!--         th:text="${staging.playId}"></a>-->
+    <td th:text="${staging.playId}"></td>
+<!--    </td>-->
     <td>
       <a th:href="@{/people/{employeeId} (employeeId=${staging.directorId})}"
          th:text="${staging.directorId}"></a>
