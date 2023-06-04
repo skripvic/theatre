@@ -22,6 +22,7 @@ public class TicketsController {
     @GetMapping("queries/q11-1")
     public String getTicketsCount(Model model) {
         model.addAttribute("FormForTicketsCount", new FormForTicketsCount());
+        model.addAttribute("plays", ticketsService.getAllPlays());
         return "queries/q11/formForTicketsCount";
     }
 
@@ -36,6 +37,7 @@ public class TicketsController {
     @GetMapping("queries/q12-1")
     public String getProfitFromTickets(Model model) {
         model.addAttribute("FormForTicketsCount", new FormForTicketsCount());
+        model.addAttribute("plays", ticketsService.getAllPlays());
         return "queries/q12/formForProfitFromTickets";
     }
 

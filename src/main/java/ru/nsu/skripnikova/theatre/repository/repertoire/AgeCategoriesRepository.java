@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.nsu.skripnikova.theatre.entity.repertoire.AgeCategories;
 
+import java.util.List;
+
 @Repository
 public interface AgeCategoriesRepository extends JpaRepository<AgeCategories, Integer> {
 

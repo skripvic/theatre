@@ -5,9 +5,13 @@ import org.springframework.stereotype.Service;
 import ru.nsu.skripnikova.theatre.controller.requests.FormForAuthorsRequest;
 import ru.nsu.skripnikova.theatre.controller.requests.FormForRolesByFields;
 import ru.nsu.skripnikova.theatre.controller.requests.RolesRequest;
+import ru.nsu.skripnikova.theatre.entity.people.Employees;
+import ru.nsu.skripnikova.theatre.entity.repertoire.AgeCategories;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Authors;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Genres;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Roles;
 import ru.nsu.skripnikova.theatre.repository.repertoire.RolesRepository;
+import ru.nsu.skripnikova.theatre.service.people.EmployeesService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +22,27 @@ public class RolesService {
     @Autowired
     private RolesRepository rolesRepository;
 
+    @Autowired
+    private GenresService genresService;
+
+    @Autowired
+    private AgeCategoriesService ageCategoriesService;
+
+
     public void addRoles (RolesRequest rolesRequest) {
         Integer nextVal = rolesRepository.getNextRolesId();
         Roles roles = new Roles(nextVal, rolesRequest.getRoleName(), rolesRequest.getVoiceId(), rolesRequest.getPlayId(),
                 rolesRequest.getSex(), rolesRequest.getBodyBuildId(), rolesRequest.getMinHeight(), rolesRequest.getMaxHeight(),
                 rolesRequest.getMinAge(), rolesRequest.getMaxAge());
         rolesRepository.save(roles);
+    }
+
+    public List<Genres> getAllGenres(){
+        return genresService.getAllGenres();
+    }
+
+    public List<AgeCategories> getAllAgeCategories(){
+        return ageCategoriesService.getAllAgeCategories();
     }
 
     public void deleteRoles (Integer rolesId) {
@@ -68,4 +87,9 @@ public class RolesService {
         return new ArrayList<>(rolesRepository.getRolesByFields(actorId, directorId, genreId,
                 ageCategoryId, fromDate, toDate));
     }
+
+    public List<Roles> getAllRoles(){
+        return rolesRepository.findAll();
+    }
+
 }

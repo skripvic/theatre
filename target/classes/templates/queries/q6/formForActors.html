@@ -23,9 +23,16 @@
 <body>
 <div class="card-body p-4 p-md-5" style="width: 75%; margin-top: 20px; margin-left: auto; margin-right: auto;">
   <form th:action="@{/queries/q6-2}" th:object="${FormForActorsRequest}" method="get">
+<!--    <div class="row">-->
+<!--      <label class="form-label" for="roleId">Роль</label>-->
+<!--      <input th:field="*{roleId}" type="number" id="roleId" class="form-control form-control-lg"/>-->
+<!--    </div>-->
     <div class="row">
-      <label class="form-label" for="roleId">Роль</label>
-      <input th:field="*{roleId}" type="number" id="roleId" class="form-control form-control-lg"/>
+      <label class="form-label" for="roleId">Роль </label>
+      <select th:field="*{roleId}" id="roleId" class="form-control form-control-lg">
+        <option value="-1">Любая</option>
+        <option th:each="role : ${roles}" th:value="${role.roleId}" th:text="${role.roleName}"></option>
+      </select>
     </div>
     <div class="row">
       <div style="display: flex; align-items: center;">

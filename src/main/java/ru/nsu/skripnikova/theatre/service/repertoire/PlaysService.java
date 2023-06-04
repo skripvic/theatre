@@ -7,6 +7,7 @@ import ru.nsu.skripnikova.theatre.controller.requests.FormForPlaysRequest;
 import ru.nsu.skripnikova.theatre.controller.requests.PlaysRequest;
 import ru.nsu.skripnikova.theatre.entity.people.Employees;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Authors;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Genres;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Plays;
 import ru.nsu.skripnikova.theatre.repository.repertoire.PlaysRepository;
 
@@ -19,10 +20,30 @@ public class PlaysService {
     @Autowired
     private PlaysRepository playsRepository;
 
+    @Autowired
+    private GenresService genresService;
+
+    @Autowired
+    private AuthorsService authorsService;
+
+    public List<Genres> getAllGenres(){
+        return genresService.getAllGenres();
+    }
+
+    public List<Authors> getAllAuthors(){
+        return authorsService.getAllAuthors();
+    }
+
     public List<Plays> getAllPlays() {
         return playsRepository.getAllPlays();
     }
 
+
+
+
+    public String getPlayNameByStagingId (Integer stagingId) {
+        return playsRepository.getPlayNameByStagingId(stagingId);
+    }
 
     public void addPlays (PlaysRequest playsRequest) {
         Integer nextVal = playsRepository.getNextPlaysId();

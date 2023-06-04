@@ -198,6 +198,7 @@ public class EmployeesController {
     @GetMapping(value = "queries/q6-1")
     public String getActorsByRoleId(Model model) {
         model.addAttribute("FormForActorsRequest", new FormForActorsRequest());
+        model.addAttribute("roles", employeesService.getAllRoles());
         return "queries/q6/formForActors";
     }
 
@@ -226,6 +227,7 @@ public class EmployeesController {
     @GetMapping(value = "queries/q9-1")
     public String getEmployeesByStagingId(Model model) {
         model.addAttribute("FormForEmployeesByStagingId", new FormForEmployeesByStagingId());
+        model.addAttribute("StagingsPlaysRequest", employeesService.getAllStagings());
         return "queries/q9/formForEmployeesByStagingId";
     }
 

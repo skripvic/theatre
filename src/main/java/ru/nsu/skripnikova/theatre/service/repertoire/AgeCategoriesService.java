@@ -6,6 +6,8 @@ import ru.nsu.skripnikova.theatre.controller.requests.AgeCategoriesRequest;
 import ru.nsu.skripnikova.theatre.entity.repertoire.AgeCategories;
 import ru.nsu.skripnikova.theatre.repository.repertoire.AgeCategoriesRepository;
 
+import java.util.List;
+
 @Service
 public class AgeCategoriesService {
 
@@ -36,5 +38,9 @@ public class AgeCategoriesService {
         }
         ageCategories.setAgeCategoryId(ageCategoryId);
         ageCategoriesRepository.save(ageCategories);
+    }
+
+    public List<AgeCategories> getAllAgeCategories(){
+        return ageCategoriesRepository.findAll();
     }
 }

@@ -5,13 +5,16 @@ import org.springframework.stereotype.Service;
 import ru.nsu.skripnikova.theatre.controller.requests.AuthorsRequest;
 import ru.nsu.skripnikova.theatre.controller.requests.FormForAuthorsRequest;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Authors;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Genres;
 import ru.nsu.skripnikova.theatre.repository.repertoire.AuthorsRepository;
+import ru.nsu.skripnikova.theatre.repository.repertoire.GenresRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AuthorsService {
@@ -19,6 +22,20 @@ public class AuthorsService {
     @Autowired
     private AuthorsRepository authorsRepository;
 
+    @Autowired
+    private GenresService genresService;
+
+    public List<Authors> getAllAuthors(){
+        return authorsRepository.findAll();
+    }
+
+    public List<String> getAllCountries(){
+        return new ArrayList<>(authorsRepository.getAllCountries());
+    }
+
+    public List<Genres> getAllGenres(){
+        return genresService.getAllGenres();
+    }
     public void addAuthors(AuthorsRequest authorsRequest) throws ParseException {
         Integer nextVal = authorsRepository.getNextAuthorsId();
         Date birthDate = formatDateFromString(authorsRequest.getDateOfBirth());
@@ -62,7 +79,7 @@ public class AuthorsService {
         if (formForAuthorsRequest.getCentury() == null){
             century = -1;
         }
-        if (formForAuthorsRequest.getCountry() == null){
+        if (Objects.equals(formForAuthorsRequest.getCountry(), "-1")){
             country = null;
         }
         return new ArrayList<>(authorsRepository.getAuthorsByFields(genreId, century, country));

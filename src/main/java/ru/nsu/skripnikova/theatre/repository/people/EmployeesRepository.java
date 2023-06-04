@@ -10,6 +10,7 @@ import ru.nsu.skripnikova.theatre.entity.repertoire.Roles;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
@@ -19,6 +20,13 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
     @Query(value = "SELECT * FROM employees \n" +
             "ORDER BY employee_id", nativeQuery = true)
     List<Employees> getAllEmployees();
+
+    @Query(value = "SELECT * FROM employees e " +
+            "JOIN stage_workers sw ON sw.stage_worker_id = e.employee_id " +
+            "WHERE e.position_id = 3 " +
+            "AND sw.type_id = ?1 " +
+            "ORDER BY e.employee_id", nativeQuery = true)
+    List<Employees> getStageWorkersByTypeId(Integer typeId);
 
 
     @Query(value = "SELECT SEQUENCE_EMPLOYEES.nextval FROM dual", nativeQuery = true)
@@ -59,15 +67,15 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
             "    FROM employees e \n" +
             "    JOIN actors a ON a.actor_id = e.employee_id \n" +
             "    JOIN roles r ON r.sex = e.sex \n" +
-            "    WHERE r.role_id = ?1 \n" +
+            "    WHERE ((r.role_id = ?1) OR (?1 < 0))\n" +
             "    AND ((?3 = 0) OR ((?3 = 1) AND (a.body_build_id = r.body_build_id OR r.body_build_id IS NULL))) \n" +
             "    AND ((?4 = 0) OR ((?4 = 1) AND (a.height >= r.min_height OR r.min_height IS NULL))) \n" +
             "    AND ((?5 = 0) OR ((?5 = 1) AND (a.height <= r.max_height OR r.max_height IS NULL))) \n" +
             "    AND ((?6 = 0) OR ((?6 = 1) AND ((trunc(months_between(sysdate, birth_date) / 12) >= r.min_age OR r.min_age IS NULL)))) \n" +
             "    AND ((?7 = 0) OR ((?7 = 1) AND ((trunc(months_between(sysdate, birth_date) / 12) <= r.max_age OR r.max_age IS NULL)))) \n" +
             "    AND ((?2 = 0) OR ((?2 = 1) AND (r.voice_id IS NULL OR r.voice_id = a.voice_id))) ", nativeQuery = true)
-    List<Employees> getActorsByRoleId(Integer roleId, Integer isVoiceCorrect, Integer isBodyBuildCorrect,
-                                      Integer isMinHeightCorrect, Integer isMaxHeightCorrect, Integer isMinAgeCorrect, Integer isMaxAgeCorrect);
+    Set<Employees> getActorsByRoleId(Integer roleId, Integer isVoiceCorrect, Integer isBodyBuildCorrect,
+                                     Integer isMinHeightCorrect, Integer isMaxHeightCorrect, Integer isMinAgeCorrect, Integer isMaxAgeCorrect);
 
     @Query(value = "SELECT * \n" +
             "    FROM employees e\n" +

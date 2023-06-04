@@ -47,4 +47,11 @@ public interface PlaysRepository extends JpaRepository<Plays, Integer> {
             "ORDER BY p.play_id", nativeQuery = true)
     List<Plays> getPlaysByFields(Integer genreId, Integer centuryOfCreation, Integer authorId);
 
+
+    @Query(value = "SELECT p.name \n" +
+            "FROM plays p\n" +
+            "JOIN stagings s ON s.play_id = p.play_id \n" +
+            "WHERE s.staging_id = ?1\n", nativeQuery = true)
+    String getPlayNameByStagingId(Integer stagingId);
+
 }

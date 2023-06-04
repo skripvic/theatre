@@ -23,9 +23,15 @@
 <body>
 <div class="card-body p-4 p-md-5" style="width: 75%; margin-top: 20px; margin-left: auto; margin-right: auto;">
   <form th:action="@{/queries/q9-2}" th:object="${FormForEmployeesByStagingId}" method="get">
+<!--    <div class="row">-->
+<!--      <label class="form-label" for="stagingId">Постановка (id)</label>-->
+<!--      <input th:field="*{stagingId}" type="number" id="stagingId" class="form-control form-control-lg"/>-->
+<!--    </div>-->
     <div class="row">
-      <label class="form-label" for="stagingId">Постановка (id)</label>
-      <input th:field="*{stagingId}" type="number" id="stagingId" class="form-control form-control-lg"/>
+      <label class="form-label" for="stagingId">Постановка </label>
+      <select th:field="*{stagingId}" id="stagingId" class="form-control form-control-lg">
+        <option th:each="request : ${StagingsPlaysRequest}" th:value="${request.stagingId}" th:text="${request.name}"></option>
+      </select>
     </div>
     <input type="submit" value="Поиск" class="btn  btn-outline-success"/>
   </form>

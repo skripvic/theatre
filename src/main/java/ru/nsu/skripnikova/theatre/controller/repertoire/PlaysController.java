@@ -10,7 +10,9 @@ import ru.nsu.skripnikova.theatre.controller.requests.FormForAuthorsRequest;
 import ru.nsu.skripnikova.theatre.controller.requests.FormForPlaysRequest;
 import ru.nsu.skripnikova.theatre.entity.people.Employees;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Authors;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Genres;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Plays;
+import ru.nsu.skripnikova.theatre.service.repertoire.GenresService;
 import ru.nsu.skripnikova.theatre.service.repertoire.PlaysService;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class PlaysController {
 
     @Autowired
     private PlaysService playsService;
+
 
     @GetMapping(value = "repertoire/{playId}")
     public String getPlays(Model model, @PathVariable(name = "playId") Integer playId) {
@@ -43,6 +46,8 @@ public class PlaysController {
     @GetMapping("queries/q2-1")
     public String getPlaysByFields(Model model) {
         model.addAttribute("FormForPlaysRequest", new FormForPlaysRequest());
+        model.addAttribute("genres", playsService.getAllGenres());
+        model.addAttribute("authors", playsService.getAllAuthors());
         return "queries/q2/formForPlays";
     }
 

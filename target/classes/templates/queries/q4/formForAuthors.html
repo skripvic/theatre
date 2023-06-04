@@ -24,16 +24,22 @@
 <div class="card-body p-4 p-md-5" style="width: 75%; margin-top: 20px; margin-left: auto; margin-right: auto;">
   <form th:action="@{/queries/q4-2}" th:object="${FormForAuthorsRequest}" method="get">
     <div class="row">
-      <label class="form-label" for="genreId">Жанр</label>
-      <input th:field="*{genreId}" type="number" id="genreId" class="form-control form-control-lg"/>
+      <label class="form-label" for="genreId">Жанр </label>
+      <select th:field="*{genreId}" id="genreId" class="form-control form-control-lg">
+        <option value="-1">Любой</option>
+        <option th:each="genre : ${genres}" th:value="${genre.genreId}" th:text="${genre.genre}"></option>
+      </select>
     </div>
     <div class="row">
       <label class="form-label" for="century">Век</label>
       <input th:field="*{century}" type="number" id="century" class="form-control form-control-lg"/>
     </div>
     <div class="row">
-      <label class="form-label" for="country">Страна</label>
-      <input th:field="*{country}" type="text" id="country" class="form-control form-control-lg"/>
+      <label class="form-label" for="country">Страна </label>
+      <select th:field="*{country}" id="country" class="form-control form-control-lg">
+        <option value="-1">Любая</option>
+        <option th:each="country : ${countries}" th:value="${country}" th:text="${country}"></option>
+      </select>
     </div>
     <input type="submit" value="Поиск" class="btn  btn-outline-success"/>
   </form>

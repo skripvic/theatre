@@ -41,13 +41,21 @@
         <input type="checkbox" th:field="*{alreadyShown}" th:value="true" id="alreadyShown" style="vertical-align: middle;">
       </div>
     </div>
+<!--    <div class="row">-->
+<!--      <label class="form-label" for="genreId">Жанр (id)</label>-->
+<!--      <input th:field="*{genreId}" type="number" id="genreId" class="form-control form-control-lg"/>-->
+<!--    </div>-->
     <div class="row">
-      <label class="form-label" for="genreId">Жанр (id)</label>
-      <input th:field="*{genreId}" type="number" id="genreId" class="form-control form-control-lg"/>
+      <label class="form-label" for="genreId">Жанр </label>
+      <select th:field="*{genreId}" id="genreId" class="form-control form-control-lg">
+        <option value="-1">Любой</option>
+        <option th:each="genre : ${genres}" th:value="${genre.genreId}" th:text="${genre.genre}"></option>
+      </select>
     </div>
+
     <div class="row">
-      <label class="form-label" for="century">В промежутке от (yyyy.mm.dd)</label>
-      <input th:field="*{fromDate}" type="text" id="century" class="form-control form-control-lg"/>
+      <label class="form-label" for="fromDate">В промежутке от (yyyy.mm.dd)</label>
+      <input th:field="*{fromDate}" type="text" id="fromDate" class="form-control form-control-lg"/>
     </div>
     <div class="row">
       <label class="form-label" for="toDate">До (yyyy.mm.dd)</label>
@@ -57,10 +65,18 @@
       <label class="form-label" for="centuryOfCreation">Век создания спектакля</label>
       <input th:field="*{centuryOfCreation}" type="text" id="centuryOfCreation" class="form-control form-control-lg"/>
     </div>
+
     <div class="row">
-      <label class="form-label" for="toDate">Автор (id)</label>
-      <input th:field="*{authorId}" type="text" id="authorId" class="form-control form-control-lg"/>
+      <label class="form-label" for="genreId">Жанр </label>
+      <select th:field="*{authorId}" id="authorId" class="form-control form-control-lg">
+        <option value="-1">Любой</option>
+        <option th:each="author : ${authors}" th:value="${author.authorId}" th:text="${author.fullName}"></option>
+      </select>
     </div>
+<!--    <div class="row">-->
+<!--      <label class="form-label" for="authorId">Автор (id)</label>-->
+<!--      <input th:field="*{authorId}" type="text" id="authorId" class="form-control form-control-lg"/>-->
+<!--    </div>-->
     <input type="submit" value="Поиск" class="btn  btn-outline-success"/>
   </form>
 </div>

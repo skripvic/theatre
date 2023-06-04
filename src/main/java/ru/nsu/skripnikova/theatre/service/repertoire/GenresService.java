@@ -6,6 +6,8 @@ import ru.nsu.skripnikova.theatre.controller.requests.GenresRequest;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Genres;
 import ru.nsu.skripnikova.theatre.repository.repertoire.GenresRepository;
 
+import java.util.List;
+
 @Service
 public class GenresService {
 
@@ -36,5 +38,9 @@ public class GenresService {
         }
         genres.setGenreId(genresId);
         genresRepository.save(genres);
+    }
+
+    public List<Genres> getAllGenres(){
+        return genresRepository.findAll();
     }
 }

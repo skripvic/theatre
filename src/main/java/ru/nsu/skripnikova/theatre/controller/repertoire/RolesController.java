@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import ru.nsu.skripnikova.theatre.controller.requests.FormForRolesByFields;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Roles;
+import ru.nsu.skripnikova.theatre.service.people.EmployeesService;
 import ru.nsu.skripnikova.theatre.service.repertoire.RolesService;
 
 import java.util.List;
@@ -17,9 +18,16 @@ public class RolesController {
     @Autowired
     private RolesService rolesService;
 
+    @Autowired
+    private EmployeesService employeesService;
+
     @GetMapping("queries/q10-1")
     public String getAuthors(Model model) {
         model.addAttribute("FormForRolesByFields", new FormForRolesByFields());
+        model.addAttribute("genres", rolesService.getAllGenres());
+        model.addAttribute("actors", employeesService.getActors());
+        model.addAttribute("directors", employeesService.getDirectors());
+        model.addAttribute("ageCategories", rolesService.getAllAgeCategories());
         return "queries/q10/formForRolesByFields";
     }
 

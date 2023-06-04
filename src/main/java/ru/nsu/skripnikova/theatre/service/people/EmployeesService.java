@@ -4,8 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nsu.skripnikova.theatre.controller.requests.*;
 import ru.nsu.skripnikova.theatre.entity.people.Employees;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Genres;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Plays;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Roles;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Stagings;
 import ru.nsu.skripnikova.theatre.repository.people.EmployeesRepository;
+import ru.nsu.skripnikova.theatre.service.repertoire.GenresService;
+import ru.nsu.skripnikova.theatre.service.repertoire.PlaysService;
+import ru.nsu.skripnikova.theatre.service.repertoire.RolesService;
+import ru.nsu.skripnikova.theatre.service.repertoire.StagingsService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +27,19 @@ public class EmployeesService {
 
     @Autowired
     private EmployeesRepository employeesRepository;
+
+    @Autowired
+    private RolesService rolesService;
+
+    @Autowired
+    private StagingsService stagingsService;
+
+    @Autowired
+    private PlaysService playsService;
+
+    public List<Employees> getDirectors() {
+        return employeesRepository.getStageWorkersByTypeId(1);
+    }
 
     public List<Employees> getActors() {
         return employeesRepository.getEmployeesByPositionId(1);
@@ -72,6 +92,18 @@ public class EmployeesService {
 
     public List<Employees> getAllEmployees() {
         return employeesRepository.getAllEmployees();
+    }
+
+    public List<StagingsPlaysRequest> getAllStagings() {
+        List<StagingsPlaysRequest> list = new ArrayList<>();
+        List<Stagings> stagings = stagingsService.getAllStagings();
+        for (Stagings staging : stagings) {
+            StagingsPlaysRequest stagingsPlaysRequest = new StagingsPlaysRequest();
+            stagingsPlaysRequest.setStagingId(staging.getStagingId());
+            stagingsPlaysRequest.setName(playsService.getPlayNameByStagingId(staging.getStagingId()));
+            list.add(stagingsPlaysRequest);
+        }
+        return list;
     }
 
     public List<Integer> getEmployeesAgesQ1() {
@@ -132,8 +164,8 @@ public class EmployeesService {
         Integer isMaxHeightCorrect = formForActorsRequest.getIsMaxHeightCorrect() ? 1 : 0;
         Integer isMinAgeCorrect = formForActorsRequest.getIsMinAgeCorrect() ? 1 : 0;
         Integer isMaxAgeCorrect = formForActorsRequest.getIsMaxAgeCorrect() ? 1 : 0;
-        return employeesRepository.getActorsByRoleId(roleId, isVoiceCorrect, isBodyBuildCorrect,
-                isMinHeightCorrect, isMaxHeightCorrect, isMinAgeCorrect, isMaxAgeCorrect);
+        return new ArrayList<>(employeesRepository.getActorsByRoleId(roleId, isVoiceCorrect, isBodyBuildCorrect,
+                isMinHeightCorrect, isMaxHeightCorrect, isMinAgeCorrect, isMaxAgeCorrect));
     }
 
     public List<Employees> getEmployeesByTour(FormForEmployeesByTourRequest formForEmployeesByTourRequest) {
@@ -176,4 +208,9 @@ public class EmployeesService {
     public Employees getEmployeesByFields(String firstName, String lastName, String birthDate) throws ParseException {
         return employeesRepository.getEmployeesByFirstNameAndLastNameAndBirthDate(firstName, lastName, formatDateFromString(birthDate));
     }
+
+    public List<Roles> getAllRoles(){
+        return rolesService.getAllRoles();
+    }
+
 }

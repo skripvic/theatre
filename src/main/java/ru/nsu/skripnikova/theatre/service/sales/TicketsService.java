@@ -4,11 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nsu.skripnikova.theatre.controller.requests.FormForRolesByFields;
 import ru.nsu.skripnikova.theatre.controller.requests.FormForTicketsCount;
+import ru.nsu.skripnikova.theatre.controller.requests.StagingsPlaysRequest;
 import ru.nsu.skripnikova.theatre.controller.requests.TicketsRequest;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Plays;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Roles;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Stagings;
 import ru.nsu.skripnikova.theatre.entity.sales.Tickets;
 import ru.nsu.skripnikova.theatre.repository.sales.TicketsRepository;
+import ru.nsu.skripnikova.theatre.service.repertoire.PlaysService;
+import ru.nsu.skripnikova.theatre.service.repertoire.StagingsService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +22,18 @@ public class TicketsService {
 
     @Autowired
     private TicketsRepository ticketsRepository;
+
+
+    @Autowired
+    private StagingsService stagingsService;
+
+    @Autowired
+    private PlaysService playsService;
+
+
+    public List<Plays> getAllPlays() {
+        return playsService.getAllPlays();
+    }
 
     public void addTickets (TicketsRequest ticketsRequest) {
         Integer nextVal = ticketsRepository.getNextTicketsId();
