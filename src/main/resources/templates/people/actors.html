@@ -7,35 +7,63 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 </head>
 
+<style>
+  .custom-heading {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    text-align: center;
+    color: darkgreen;
+  }
+</style>
+
 <head>
-  <title>Employees</title>
-  <div style="text-align: center;">Работники</div>
-  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
-  <input type="button" onclick="location.href='http://localhost:8080/people/addEmployees';" value="Создать работника" />
-  <input type="button" onclick="location.href='http://localhost:8080/people/allEmployees';" value="Все работники"/>
-  <input type="button" onclick="location.href='http://localhost:8080/people/getMusicians';" value="Музыканты"/>
-  <input type="button" onclick="location.href='http://localhost:8080/people/getStageWorkers';" value="Постановщики"/>
-  <input type="button" onclick="location.href='http://localhost:8080/people/getGeneralWorkers';" value="Служащие"/>
+  <div class="custom-heading">Актеры</div>
+  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную" class="btn btn-success"/>
+  <input type="button" onclick="location.href='http://localhost:8080/people/addEmployees';" value="Создать сотрудника"  class="btn btn-success"/>
+  <input type="button" onclick="location.href='http://localhost:8080/people/allEmployees';" value="Все сотрудники"  class="btn btn-success"/>
+  <input type="button" onclick="location.href='http://localhost:8080/people/getMusicians';" value="Музыканты"  class="btn btn-success"/>
+  <input type="button" onclick="location.href='http://localhost:8080/people/getStageWorkers';" value="Постановщики"  class="btn btn-success"/>
+  <input type="button" onclick="location.href='http://localhost:8080/people/getGeneralWorkers';" value="Служащие"  class="btn btn-success"/>
 </head>
 
-<table class="table table-bordered table-striped">
+<style>
+  .custom-table {
+    margin-top: 60px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<table class="table table-bordered table-striped custom-table">
   <thead>
   <tr>
-    <th>id</th>
     <th>Имя</th>
     <th>Фамилия</th>
-    <th>Дата рождения</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="employees:${employeesList}">
-    <td>
-      <a th:href="@{/people/{employeeId} (employeeId=${employees.employeeId})}"
-         th:text="${employees.employeeId}"></a>
-    </td>
     <td th:text="${employees.firstName}"></td>
     <td th:text="${employees.lastName}"></td>
-    <td th:text="${employees.birthDate}"></td>
+    <td>
+      <a th:href="@{/people/{employeeId}(employeeId=${employees.employeeId})}" class="btn  btn-outline-success">Информация</a>
+    </td>
+    <td>
+      <form th:action="@{/people/updateEmployee/{employeeId} (employeeId=${employees.employeeId})}" method="get">
+        <input type="submit" class="btn btn-outline-warning" value="Изменить"/>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{/people/deleteEmployee/{employeeId} (employeeId=${employees.employeeId})}" method="post">
+        <input type="submit" class="btn btn-outline-danger" value="Удалить"/>
+      </form>
+    </td>
   </tr>
   </tbody>
 </table>

@@ -7,6 +7,7 @@ import ru.nsu.skripnikova.theatre.entity.people.Employees;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Plays;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface PlaysRepository extends JpaRepository<Plays, Integer> {
@@ -34,8 +35,8 @@ public interface PlaysRepository extends JpaRepository<Plays, Integer> {
             "AND   ((?6 < 0) OR trunc(p.year_of_creation / 100)+1 = ?6) \n" +
             "AND   ((?7 < 0) OR a.author_id = ?7) \n" +
             "ORDER BY p.play_id", nativeQuery = true)
-    List<Plays> getPlaysByFieldsStaged(Integer thisSeason, Integer alreadyShown, Integer genreId, String fromDate,
-                                 String toDate, Integer centuryOfCreation, Integer authorId);
+    Set<Plays> getPlaysByFieldsStaged(Integer thisSeason, Integer alreadyShown, Integer genreId, String fromDate,
+                                      String toDate, Integer centuryOfCreation, Integer authorId);
 
     @Query(value = "SELECT * \n" +
             "FROM plays p\n" +

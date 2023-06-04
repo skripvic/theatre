@@ -19,6 +19,15 @@ public class Musicians {
     @Column(name = "MUSIC_EXPERIENCE")
     private String musicExperience;
 
+    public Musicians() {
+    }
+
+    public Musicians(Integer musicianId, String instrument, String musicExperience) {
+        this.musicianId = musicianId;
+        this.instrument = instrument;
+        this.musicExperience = musicExperience;
+    }
+
     public Integer getMusicianId() {
         return musicianId;
     }

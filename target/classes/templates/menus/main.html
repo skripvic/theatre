@@ -5,10 +5,35 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 </head>
 
-<head>
-  <div style="text-align: center;">Добро пожаловать в менеджер театра "Дом"!</div>
-</head>
-<table class="table table-bordered table-striped">
+<style>
+  .custom-heading {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    text-align: center;
+  }
+</style>
+
+<div class="custom-heading">Добро пожаловать в менеджер театра!</div>
+
+<style>
+  .table thead th {
+    background-color: green;
+    color: white;
+  }
+</style>
+
+<style>
+  .custom-table {
+    margin-top: 60px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<table class="table table-bordered table-striped custom-table">
   <thead>
   <tr>
     <th>Категория</th>
@@ -20,28 +45,28 @@
     <td>
       Запросы
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/menus/queryMenu';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/menus/queryMenu';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
       Работники
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/people/allEmployees';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/people/allEmployees';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
       Спектакли
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/repertoire/allPlays';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/repertoire/allPlays';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
       Постановки
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/repertoire/allStagings';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/repertoire/allStagings';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   </tbody>

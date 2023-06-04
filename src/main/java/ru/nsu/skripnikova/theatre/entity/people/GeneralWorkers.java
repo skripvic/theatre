@@ -9,6 +9,14 @@ import javax.persistence.Table;
 @Table(name = "GENERAL_WORKERS")
 public class GeneralWorkers {
 
+    public GeneralWorkers() {
+    }
+
+    public GeneralWorkers(Integer generalWorkerId, String experience) {
+        this.generalWorkerId = generalWorkerId;
+        this.experience = experience;
+    }
+
     @Id
     @Column(name = "GENERAL_WORKER_ID")
     private Integer generalWorkerId;

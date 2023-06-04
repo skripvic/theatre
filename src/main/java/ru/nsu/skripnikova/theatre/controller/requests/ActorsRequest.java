@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ActorsRequest {
 
+    @JsonProperty(value = "actorId")
+    private Integer actorId;
+
     @JsonProperty(value = "voiceId")
     private Integer voiceId;
 
@@ -15,6 +18,14 @@ public class ActorsRequest {
 
     public Integer getVoiceId() {
         return voiceId;
+    }
+
+    public Integer getActorId() {
+        return actorId;
+    }
+
+    public void setActorId(Integer actorId) {
+        this.actorId = actorId;
     }
 
     public void setVoiceId(Integer voiceId) {

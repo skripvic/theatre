@@ -7,54 +7,74 @@
 </head>
 
 <head>
-  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
-  <input type="button" onclick="location.href='http://localhost:8080/people/allEmployees';" value="Все работники" />
+  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную" class="btn btn-success"/>
 </head>
 
-<body>
-<table class="table table-bordered table-striped">
-  <thead>
-  <tr>
-    <th>id</th>
-    <th>Имя</th>
-    <th>Фамилия</th>
-    <th>Дата рождения</th>
-    <th>Пол</th>
-    <th>Количество детей</th>
-    <th>Дата устройства</th>
-    <th>Дата увольнения</th>
-    <th>Зарплата</th>
-    <th>Является ли студентом</th>
-    <th>Тип</th>
-  </tr>
-  </thead>
-  <tbody>
-  <td th:text="${employeeId}"></td>
-  <td th:text="${firstname}"></td>
-  <td th:text="${lastname}"></td>
-  <td th:text="${birthDate}"></td>
-  <td th:text="${sex}"></td>
-  <td th:text="${numberOfChildren}"></td>
-  <td th:text="${firstWorkDay}"></td>
-  <td th:text="${lastWorkDay}"></td>
-  <td th:text="${salary}"></td>
-  <td th:text="${isStudent}"></td>
-  <td th:text="${positionId}"></td>
-  </tbody>
-</table>
-
 <style>
-  .center {
-    padding: 10px;
+  .custom-heading {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    text-align: center;
   }
 </style>
 
-<form class="center" th:action="@{/people/deleteEmployee/{employeeId} (employeeId=${employeeId})}" method="post">
-  <input type="submit" class="center" value="Удалить"/>
-</form>
-<form class="center" th:action="@{/people/updateEmployee/{employeeId} (employeeId=${employeeId})}" method="get">
-  <input type="submit" class="center" value="Изменить"/>
-</form>
+<head>
+  <div  class="custom-heading">Информация о сотруднике</div>
+</head>
+
+<style>
+  .custom-table {
+    margin-top: 60px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<table class="table table-bordered table-striped custom-table">
+  <tbody>
+  <td>Имя</td>
+  <td th:text="${firstname}"></td>
+  </tbody>
+  <tbody>
+  <td>Фамилия</td>
+  <td th:text="${lastname}"></td>
+  </tbody>
+  <tbody>
+  <td>Дата рождения</td>
+  <td th:text="${birthDate}"></td>
+  </tbody>
+  <tbody>
+  <td>Пол</td>
+  <td th:text="${sex}"></td>
+  </tbody>
+  <tbody>
+  <td>Количество детей</td>
+  <td th:text="${numberOfChildren}"></td>
+  </tbody>
+  <tbody>
+  <td>Дата устройства</td>
+  <td th:text="${firstWorkDay}"></td>
+  </tbody>
+  <tbody>
+  <td>Дата увольнения</td>
+  <td th:text="${lastWorkDay}"></td>
+  </tbody>
+  <tbody>
+  <td>Зарплата</td>
+  <td th:text="${salary}"></td>
+  </tbody>
+  <tbody>
+  <td>Является ли студентом</td>
+  <td th:text="${isStudent}"></td>
+  </tbody>
+  <tbody>
+  <td>Должность</td>
+  <td th:text="${positionId}"></td>
+  </tbody>
+</table>
 
 </body>
 </html>

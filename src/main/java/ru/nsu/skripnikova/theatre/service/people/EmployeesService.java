@@ -172,4 +172,8 @@ public class EmployeesService {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
         return formatter.parse(stringDate);
     }
+
+    public Employees getEmployeesByFields(String firstName, String lastName, String birthDate) throws ParseException {
+        return employeesRepository.getEmployeesByFirstNameAndLastNameAndBirthDate(firstName, lastName, formatDateFromString(birthDate));
+    }
 }

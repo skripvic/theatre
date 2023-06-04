@@ -9,6 +9,7 @@ import ru.nsu.skripnikova.theatre.entity.repertoire.Authors;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Roles;
 import ru.nsu.skripnikova.theatre.repository.repertoire.RolesRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,7 +65,7 @@ public class RolesService {
         if (formForRolesByFields.getAgeCategoryId() == null){
             ageCategoryId = -1;
         }
-        return rolesRepository.getRolesByFields(actorId, directorId, genreId,
-                ageCategoryId, fromDate, toDate);
+        return new ArrayList<>(rolesRepository.getRolesByFields(actorId, directorId, genreId,
+                ageCategoryId, fromDate, toDate));
     }
 }

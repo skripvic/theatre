@@ -9,20 +9,20 @@
 
 <body>
 <div class="card-body p-4 p-md-5">
-  <form th:action="@{/people/addActorsPost}" th:object="${actorsRequest}" method="post">
+  <form th:action="@{/people/addActorsPost/{actorId} (actorId=${actorId})}" th:object="${actorRequest}" method="post">
     <div class="row">
-      <label class="form-label" for="voiceId">Имя</label>
+      <label class="form-label" for="voiceId">Голос</label>
       <input th:field="*{voiceId}" type="text" id="voiceId" class="form-control form-control-lg"/>
     </div>
     <div class="row">
-      <label class="form-label" for="height">Фамилия</label>
+      <label class="form-label" for="height">Рост</label>
       <input th:field="*{height}" type="text" id="height" class="form-control form-control-lg"/>
     </div>
     <div class="row">
-      <label class="form-label" for="bodyBuildId">Дата рождения</label>
+      <label class="form-label" for="bodyBuildId">Телосложение</label>
       <input th:field="*{bodyBuildId}" type="text" id="bodyBuildId" class="form-control form-control-lg"/>
     </div>
-    <input type="submit" value="Сохранить"/>
+    <input type="submit" value="Сохранить" class="btn btn-outline-success"/>
   </form>
 </div>
 </body>

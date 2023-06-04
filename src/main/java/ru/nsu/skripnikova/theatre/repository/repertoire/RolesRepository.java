@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Roles;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface RolesRepository extends JpaRepository<Roles, Integer> {
@@ -27,7 +28,7 @@ public interface RolesRepository extends JpaRepository<Roles, Integer> {
             "    AND ((?4 < 0) OR age_category_id = ?4)\n" +
             "    AND ((?5 IS NULL) OR sd.show_date >= TO_DATE(?5, 'yyyy.mm.dd')) " +
             "    AND ((?6 IS NULL) OR sd.show_date <= TO_DATE(?6, 'yyyy.mm.dd')) \n", nativeQuery = true)
-    List<Roles> getRolesByFields(Integer actorId, Integer directorId, Integer genreId,
-                                 Integer ageCategoryId, String fromDate, String toDate);
+    Set<Roles> getRolesByFields(Integer actorId, Integer directorId, Integer genreId,
+                                Integer ageCategoryId, String fromDate, String toDate);
 
 }

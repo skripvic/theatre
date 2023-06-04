@@ -7,68 +7,89 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 </head>
 
+<style>
+    .custom-heading {
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 24px;
+        text-align: center;
+    }
+</style>
+
 <head>
-    <title>Employees</title>
-    <div style="text-align: center;">Постановщики и актеры</div>
-    <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
+    <div  class="custom-heading">Постановщики и актеры</div>
+    <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную" class="btn btn-success"/>
+    <input type="button" onclick="location.href='http://localhost:8080/menus/queryMenu';" value="Запросы" class="btn btn-success"/>
 </head>
 
-<table class="table table-bordered table-striped">
+<style>
+    .table thead th {
+        background-color: green;
+        color: white;
+    }
+</style>
+
+<style>
+    .custom-table {
+        margin-top: 60px;
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<table class="table table-bordered table-striped custom-table">
     <thead>
     <tr>
         <th> </th>
-        <th>id</th>
         <th>Имя</th>
         <th>Фамилия</th>
+        <th> </th>
     </tr>
     </thead>
     <tbody>
     <td>Режиссер</td>
-    <td>
-        <a th:href="@{/people/{employeeId}(employeeId=${director.employeeId})}"
-           th:text="${director.employeeId}"></a>
-    </td>
     <td th:text="${director.firstName}"></td>
     <td th:text="${director.lastName}"></td>
+    <td>
+        <a th:href="@{/people/{employeeId}(employeeId=${director.employeeId})}" class="btn btn-outline-success">Информация</a>
+    </td>
     </tbody>
     <tbody>
     <td>Художник-постановщик</td>
-    <td>
-        <a th:href="@{/people/{employeeId}(employeeId=${artDirector.employeeId})}"
-           th:text="${artDirector.employeeId}"></a>
-    </td>
     <td th:text="${artDirector.firstName}"></td>
     <td th:text="${artDirector.lastName}"></td>
+    <td>
+        <a th:href="@{/people/{employeeId}(employeeId=${artDirector.employeeId})}" class="btn btn-outline-success">Информация</a>
+    </td>
     </tbody>
     <tbody>
     <td>Дирижер</td>
-    <td>
-        <a th:href="@{/people/{employeeId}(employeeId=${conductor.employeeId})}"
-           th:text="${conductor.employeeId}"></a>
-    </td>
     <td th:text="${conductor.firstName}"></td>
     <td th:text="${conductor.lastName}"></td>
+    <td>
+        <a th:href="@{/people/{employeeId}(employeeId=${conductor.employeeId})}" class="btn btn-outline-success">Информация</a>
+    </td>
     </tbody>
     <tbody>
     <tr th:each="actor : ${actorsList}">
         <td>Актер</td>
-        <td>
-            <a th:href="@{/people/{employeeId}(employeeId=${actor.employeeId})}"
-               th:text="${actor.employeeId}"></a>
-        </td>
         <td th:text="${actor.firstName}"></td>
         <td th:text="${actor.lastName}"></td>
+        <td>
+            <a th:href="@{/people/{employeeId}(employeeId=${actor.employeeId})}" class="btn btn-outline-success">Информация</a>
+        </td>
     </tr>
     </tbody>
     <tbody>
     <tr th:each="backupActor : ${backupActorsList}">
         <td>Запасной актер</td>
-        <td>
-            <a th:href="@{/people/{employeeId}(employeeId=${backupActor.employeeId})}"
-               th:text="${backupActor.employeeId}"></a>
-        </td>
         <td th:text="${backupActor.firstName}"></td>
         <td th:text="${backupActor.lastName}"></td>
+        <td>
+            <a th:href="@{/people/{employeeId}(employeeId=${backupActor.employeeId})}" class="btn btn-outline-success">Информация</a>
+        </td>
     </tr>
     </tbody>
 </table>

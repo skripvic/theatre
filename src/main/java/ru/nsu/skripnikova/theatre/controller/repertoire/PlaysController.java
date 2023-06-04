@@ -49,7 +49,7 @@ public class PlaysController {
     @GetMapping(value = "queries/q2-2")
     public String getPlaysByFieldsPost(@ModelAttribute("FormForPlaysRequest") FormForPlaysRequest formForPlaysRequest,
                                Model model) {
-        List<Plays> playsList= playsService.getPlaysByFields(formForPlaysRequest);
+        List<Plays> playsList = playsService.getPlaysByFields(formForPlaysRequest);
         model.addAttribute("playsList", playsList);
         return "queries/q2/getPlaysByFields";
     }

@@ -9,6 +9,16 @@ import javax.persistence.Table;
 @Table(name = "ACTORS")
 public class Actors {
 
+    public Actors() {
+    }
+
+    public Actors(Integer actorId, Integer voiceId, Integer height, Integer bodyBuildId) {
+        this.actorId = actorId;
+        this.voiceId = voiceId;
+        this.height = height;
+        this.bodyBuildId = bodyBuildId;
+    }
+
     @Id
     @Column(name = "ACTOR_ID")
     private Integer actorId;

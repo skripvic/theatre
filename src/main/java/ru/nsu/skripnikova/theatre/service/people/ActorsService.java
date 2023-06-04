@@ -2,6 +2,7 @@ package ru.nsu.skripnikova.theatre.service.people;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.nsu.skripnikova.theatre.controller.requests.ActorsRequest;
 import ru.nsu.skripnikova.theatre.controller.requests.EmployeesRequest;
 import ru.nsu.skripnikova.theatre.entity.people.Actors;
 import ru.nsu.skripnikova.theatre.entity.people.Employees;
@@ -18,10 +19,10 @@ public class ActorsService {
     @Autowired
     private ActorsRepository actorsRepository;
 
-//    public void addActors (EmployeesRequest employeesRequest) throws ParseException {
-//        Integer nextVal = actorsRepository.getNextEmployeesId();
-//        Actors actors = new Actors();
-//        actorsRepository.save(actors);
-//    }
+    public void addActors (ActorsRequest actorsRequest, Integer employeeId) throws ParseException {
+        Actors actors = new Actors(employeeId, actorsRequest.getVoiceId(), actorsRequest.getHeight(), actorsRequest.getBodyBuildId());
+        actorsRepository.save(actors);
+    }
+
 
 }

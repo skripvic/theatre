@@ -34,13 +34,18 @@ public interface ActorsRepository extends JpaRepository<Actors, Integer> {
             "   AND (r.voice_id IS NULL OR r.voice_id = a.voice_id);\n", nativeQuery = true)
     List<Actors> getActorsByRoleId(Integer roleId);
 
+
     @Query(value = "SELECT e.first_name, e.last_name\n" +
-            "FROM actors a\n" +
-            "JOIN actor_title at ON a.actor_id = at.actor_id\n" +
-            "JOIN titles t ON at.title_id = t.title_id\n" +
-            "JOIN employees e ON a.actor_id = e.employee_id\n" +
-            "WHERE title_id = ?1\n", nativeQuery = true)
-    List<Actors> getActorsByTitleId(Integer titleId);
+            "    FROM actors a\n" +
+            "    JOIN actor_title at ON a.actor_id = at.actor_id\n" +
+            "    JOIN titles t ON at.title_id = t.title_id\n" +
+            "    JOIN employees e ON a.actor_id = e.employee_id\n" +
+            "    WHERE title_id = ?1 \n" +
+            "    AND   e.sex = ?2 \n" +
+            "    AND   (trunc(months_between(sysdate, birth_date) / 12) >= ?3 OR ?3 IS NULL)\n" +
+            "    AND   (trunc(months_between(sysdate, birth_date) / 12) <= ?4 OR ?4 IS NULL)\n"
+            , nativeQuery = true)
+    List<Actors> getActorsByTitleId(Integer titleId, String sex, Integer minAge, Integer maxAge);
 
 
 

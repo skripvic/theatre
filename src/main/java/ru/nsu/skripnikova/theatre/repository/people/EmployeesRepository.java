@@ -8,6 +8,7 @@ import ru.nsu.skripnikova.theatre.entity.people.Actors;
 import ru.nsu.skripnikova.theatre.entity.people.Employees;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Roles;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -116,6 +117,6 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
     List<Employees> getBackupActorsByStagingId(Integer stagingId);
 
 
-
+    Employees getEmployeesByFirstNameAndLastNameAndBirthDate(String firstName, String lastName, Date birthDate);
 
 }

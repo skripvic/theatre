@@ -2,6 +2,8 @@ package ru.nsu.skripnikova.theatre.service.people;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.nsu.skripnikova.theatre.controller.requests.StageWorkerRequest;
+import ru.nsu.skripnikova.theatre.entity.people.Musicians;
 import ru.nsu.skripnikova.theatre.entity.people.StageWorkers;
 import ru.nsu.skripnikova.theatre.repository.people.StageWorkersRepository;
 
@@ -12,6 +14,11 @@ public class StageWorkersService {
     private StageWorkersRepository stageWorkersRepository;
 
     public void addStageWorkers (StageWorkers stageWorkers) {
+        stageWorkersRepository.save(stageWorkers);
+    }
+
+    public void addStageWorkers (StageWorkerRequest stageWorkerRequest, Integer stageWorkerId) {
+        StageWorkers stageWorkers = new StageWorkers(stageWorkerId, stageWorkerRequest.getTypeId(), stageWorkerRequest.getExperience());
         stageWorkersRepository.save(stageWorkers);
     }
 

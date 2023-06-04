@@ -10,6 +10,7 @@ import ru.nsu.skripnikova.theatre.entity.repertoire.Authors;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Plays;
 import ru.nsu.skripnikova.theatre.repository.repertoire.PlaysRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -77,7 +78,7 @@ public class PlaysService {
         if (!isStaged && fromDate != null && toDate != null && thisSeason == 0 && alreadyShown == 0)
             return playsRepository.getPlaysByFields(genreId, centuryOfCreation, authorId);
         else
-            return playsRepository.getPlaysByFieldsStaged(thisSeason, alreadyShown, genreId, fromDate,
-                toDate, centuryOfCreation, authorId);
+            return new ArrayList<>(playsRepository.getPlaysByFieldsStaged(thisSeason, alreadyShown, genreId, fromDate,
+                toDate, centuryOfCreation, authorId));
     }
 }

@@ -5,92 +5,117 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 </head>
 
-<head>
-  <div style="text-align: center;">Добро пожаловать в менеджер театра "Дом"!</div>
-</head>
-<table class="table table-bordered table-striped">
+<style>
+  .custom-heading {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    text-align: center;
+  }
+</style>
+
+<div class="custom-heading">Выберите нужный вам запрос</div>
+
+<style>
+  .table thead th {
+    background-color: green;
+    color: white;
+  }
+</style>
+
+<style>
+  .custom-table {
+    margin-top: 60px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<table class="table table-bordered table-striped custom-table">
   <thead>
   <tr>
-    <th>Категория</th>
+    <th>Запрос</th>
     <th></th>
   </tr>
   </thead>
   <tbody>
   <tr>
     <td>
-      Запрос 1-1
+      Список работников театра
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q1-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q1-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 1-2
+      Число работников театра
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q1-2';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q1-2';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 2/3/5
+      Список спектаклей
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q2-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q2-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 4
+      Список авторов
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q4-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q4-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 6
+      Список актеров, подходящих на роль
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q6-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q6-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 8
+      Список гастролирующих актеров
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q8-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q8-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 9
+      Список работников, работающих над указанной постановкой
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q9-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q9-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 10
+      Список ролей, сыгранных актером
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q10-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q10-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 11
+      Число проданных билетов
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q11-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q11-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 12
+      Общая сумма вырученных денег
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q12-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q12-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   <tr>
     <td>
-      Запрос 13
+      Получить перечень свободных мест
     <th>
-      <input type="button" onclick="location.href='http://localhost:8080/queries/q13-1';" value="Перейти"/>
+      <input type="button" onclick="location.href='http://localhost:8080/queries/q13-1';" value="Перейти" class="btn btn-success"/>
     </th>
   </tr>
   </tbody>

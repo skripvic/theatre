@@ -7,22 +7,46 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 </head>
 
+<style>
+  .custom-heading {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    text-align: center;
+  }
+</style>
+
 <head>
-  <title>Employees</title>
-  <div style="text-align: center;">Работники</div>
-  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
+  <div  class="custom-heading">Спектакли</div>
+  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную" class="btn btn-success"/>
+  <input type="button" onclick="location.href='http://localhost:8080/menus/queryMenu';" value="Запросы" class="btn btn-success"/>
 </head>
 
-<table class="table table-bordered table-striped">
+<style>
+  .table thead th {
+    background-color: green;
+    color: white;
+  }
+</style>
+
+<style>
+  .custom-table {
+    margin-top: 60px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<table class="table table-bordered table-striped custom-table">
   <thead>
   <tr>
-    <th>id</th>
     <th>Название спектакля</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="play:${playsList}">
-    <td th:text="${play.playId}"></td>
     <td th:text="${play.name}"></td>
   </tr>
   </tbody>

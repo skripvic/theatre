@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.nsu.skripnikova.theatre.controller.requests.*;
 import ru.nsu.skripnikova.theatre.entity.people.Employees;
 import ru.nsu.skripnikova.theatre.service.people.EmployeesService;
+import ru.nsu.skripnikova.theatre.service.people.PositionsService;
 
 import java.beans.Transient;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 @Controller
@@ -23,6 +26,9 @@ public class EmployeesController {
     @Autowired
     private EmployeesService employeesService;
 
+    @Autowired
+    private PositionsService positionsService;
+
     @GetMapping(value = "people/addEmployees")
     public String addEmployeesForm(Model model) {
         model.addAttribute("employeesRequest", new EmployeesRequest());
@@ -30,27 +36,31 @@ public class EmployeesController {
     }
 
     @PostMapping(value = "people/addEmployeesPost")
-    public String addEmployees(@ModelAttribute("employeesRequest") EmployeesRequest employeesRequest) throws ParseException {
+    public String addEmployees(@ModelAttribute("employeesRequest") EmployeesRequest employeesRequest, Model model) throws ParseException {
         employeesService.addEmployees(employeesRequest);
-//        if (employeesRequest.getPositionId() == 1) {
-//            Integer employeeId = employeesService.getNextEmployeesId();
-//            return "people/addActors/{employeeId}";
-//        }
+        if (employeesRequest.getPositionId() == 1) {
+            Employees employees = employeesService.getEmployeesByFields(employeesRequest.getFirstName(), employeesRequest.getLastName(), employeesRequest.getBirthDate());
+            model.addAttribute("actorRequest", new ActorsRequest());
+            model.addAttribute("actorId", employees.getEmployeeId());
+            return "people/addActors";
+        } else if (employeesRequest.getPositionId() == 2) {
+            Employees employees = employeesService.getEmployeesByFields(employeesRequest.getFirstName(), employeesRequest.getLastName(), employeesRequest.getBirthDate());
+            model.addAttribute("musicianRequest", new MusiciansRequest());
+            model.addAttribute("musicianId", employees.getEmployeeId());
+            return "people/addMusicians";
+        } else if (employeesRequest.getPositionId() == 3) {
+            Employees employees = employeesService.getEmployeesByFields(employeesRequest.getFirstName(), employeesRequest.getLastName(), employeesRequest.getBirthDate());
+            model.addAttribute("stageWorkerRequest", new StageWorkerRequest());
+            model.addAttribute("stageWorkerId", employees.getEmployeeId());
+            return "people/addStageWorkers";
+        } else if (employeesRequest.getPositionId() == 4) {
+            Employees employees = employeesService.getEmployeesByFields(employeesRequest.getFirstName(), employeesRequest.getLastName(), employeesRequest.getBirthDate());
+            model.addAttribute("generalWorkerRequest", new GeneralWorkerRequest());
+            model.addAttribute("generalWorkerId", employees.getEmployeeId());
+            return "people/addGeneralWorkers";
+        }
         return "redirect:allEmployees";
     }
-
-//    @GetMapping(value = "people/addActors/{employeeId}")
-//    public String addActors(@PathVariable(name = "employeeId") Integer employeeId, Model model) {
-//        model.addAttribute("actorsRequest", new ActorsRequest());
-//        return "people/addActors";
-//    }
-
-//
-//    @PostMapping(value = "people/addActorsPost")
-//    public String addActorsPost(@ModelAttribute("actorsRequest") ActorsRequest actorsRequest) throws ParseException {
-//        actorsService.addActors(actorsRequest);
-//        return "redirect:allEmployees";
-//    }
 
     @GetMapping(value = "people/getActors")
     public String getActors(Model model) {
@@ -93,14 +103,14 @@ public class EmployeesController {
     }
 
     @GetMapping(value = "/people/updateEmployee/{employeeId}")
-    public String getStaffUpdate(@PathVariable(name = "employeeId") Integer employeeId, Model model) {
+    public String updateEmployees(@PathVariable(name = "employeeId") Integer employeeId, Model model) {
         model.addAttribute("employeeRequest", new EmployeesRequest());
         model.addAttribute("id", employeeId);
         return "people/updateEmployee";
     }
 
     @PostMapping(value = "people/updateEmployeePost/{employeeId}")
-    public String updateEmployees(@PathVariable(name = "employeeId") Integer employeeId,
+    public String updateEmployeesPost(@PathVariable(name = "employeeId") Integer employeeId,
                               @ModelAttribute("employeeRequest") EmployeesRequest employeesRequest) {
         employeesService.updateEmployees(employeesRequest, employeeId);
         return "redirect:/people/allEmployees";
@@ -130,17 +140,34 @@ public class EmployeesController {
     @GetMapping(value = "people/{employeeId}")
     public String getEmployees (Model model, @PathVariable(name = "employeeId") Integer employeeId) {
         Employees employees = employeesService.getEmployees(employeeId);
+        String isStudentStr, sexStr;
+        if (employees.getIsStudent() == 1){
+            isStudentStr = "Да";
+        } else {
+            isStudentStr = "Нет";
+        }
+        if (employees.getSex() == "м"){
+            sexStr = "Мужской";
+        } else {
+            sexStr = "Женский";
+        }
+        LocalDate lastWorkDay;
+        if (employees.getLastWorkDay() != null) {
+            lastWorkDay = employees.getLastWorkDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        } else {
+            lastWorkDay = null;
+        }
         model.addAttribute("employeeId", employees.getEmployeeId());
         model.addAttribute("firstname", employees.getFirstName());
         model.addAttribute("lastname", employees.getLastName());
-        model.addAttribute("birthDate", employees.getBirthDate());
+        model.addAttribute("birthDate", employees.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         model.addAttribute("numberOfChildren", employees.getNumberOfChildren());
-        model.addAttribute("sex", employees.getSex());
-        model.addAttribute("firstWorkDay", employees.getFirstWorkDay());
-        model.addAttribute("lastWorkDay", employees.getLastWorkDay());
+        model.addAttribute("sex", sexStr);
+        model.addAttribute("firstWorkDay", employees.getFirstWorkDay().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        model.addAttribute("lastWorkDay", lastWorkDay);
         model.addAttribute("salary", employees.getSalary());
-        model.addAttribute("positionId", employees.getPositionId());
-        model.addAttribute("isStudent", employees.getIsStudent());
+        model.addAttribute("positionId", positionsService.getPositions(employees.getPositionId()).getPosition());
+        model.addAttribute("isStudent", isStudentStr);
         return "people/employeeInfo";
     }
 
