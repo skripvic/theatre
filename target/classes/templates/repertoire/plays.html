@@ -19,11 +19,26 @@
 
 <head>
   <div  class="custom-heading">Спектакли</div>
-  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
-  <input type="button" onclick="location.href='http://localhost:8080/repertoire/addStaging';" value="Создать спектакль" />
+  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную" class="btn btn-success"/>
 </head>
 
-<table class="table table-bordered table-striped">
+<style>
+  .table thead th {
+    background-color: green;
+    color: white;
+  }
+</style>
+
+<style>
+  .custom-table {
+    margin-top: 60px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<table class="table table-bordered table-striped custom-table">
   <thead>
   <tr>
     <th>id</th>
@@ -38,28 +53,10 @@
   <tr th:each="play:${playsList}">
     <td th:text="${play.playId}"></td>
     <td th:text="${play.name}"></td>
-    <td th:text="${play.authorId}"></td>
-    <td th:text="${play.ageCategoryId}"></td>
-    <td th:text="${play.genreId}"></td>
+    <td th:text="${authorsList[play.authorId - 1].fullName}"></td>
+    <td th:text="${ageCategories[play.ageCategoryId - 1].ageCategory}"></td>
+    <td th:text="${genresList[play.genreId - 1].genre}"></td>
     <td th:text="${play.yearOfCreation}"></td>
-<!--    <td th:text="${staging.stagingId}"></td>-->
-<!--    <td>-->
-<!--      <a th:href="@{/repertoire/{playId} (stagingsId=${staging.playId})}"-->
-<!--         th:text="${staging.playId}"></a>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--      <a th:href="@{/people/{employeeId} (employeeId=${staging.directorId})}"-->
-<!--         th:text="${staging.directorId}"></a>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--      <a th:href="@{/people/{employeeId} (employeeId=${staging.artDirectorId})}"-->
-<!--         th:text="${staging.artDirectorId}"></a>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--      <a th:href="@{/people/{employeeId} (employeeId=${staging.conductorId})}"-->
-<!--         th:text="${staging.conductorId}"></a>-->
-<!--    </td>-->
-<!--    <td th:text="${staging.startPrice}"></td>-->
   </tr>
   </tbody>
 </table>

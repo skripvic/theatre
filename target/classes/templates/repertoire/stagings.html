@@ -19,13 +19,28 @@
 
 <head>
   <div  class="custom-heading">Постановки</div>
-  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную"/>
+  <input type="button" onclick="location.href='http://localhost:8080/menus/main';" value="Перейти на главную" class="btn btn-success"/>
 </head>
 
-<table class="table table-bordered table-striped">
+<style>
+  .table thead th {
+    background-color: green;
+    color: white;
+  }
+</style>
+
+<style>
+  .custom-table {
+    margin-top: 60px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
+<table class="table table-bordered table-striped custom-table">
   <thead>
   <tr>
-    <th>id</th>
     <th>Спектакль</th>
     <th>Режиссер</th>
     <th>Художник-постановщик</th>
@@ -34,20 +49,19 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="staging:${stagingsList}">
-    <td th:text="${staging.stagingId}"></td>
-    <td th:text="${staging.playId}"></td>
+  <tr th:each="staging, index:${stagingsList}">
+    <td th:text="${playsList[index.index].name}"></td>
     <td>
       <a th:href="@{/people/{employeeId} (employeeId=${staging.directorId})}"
-         th:text="${staging.directorId}"></a>
+         th:text="${directorList[index.index].firstName} + ' ' + ${directorList[index.index].lastName}"></a>
     </td>
     <td>
       <a th:href="@{/people/{employeeId} (employeeId=${staging.artDirectorId})}"
-         th:text="${staging.artDirectorId}"></a>
+         th:text="${artDirectorList[index.index].firstName} + ' ' + ${artDirectorList[index.index].lastName}"></a>
     </td>
     <td>
       <a th:href="@{/people/{employeeId} (employeeId=${staging.conductorId})}"
-         th:text="${staging.conductorId}"></a>
+         th:text="${conductorList[index.index].firstName} + ' ' + ${conductorList[index.index].lastName}"></a>
     </td>
     <td th:text="${staging.startPrice}"></td>
   </tr>

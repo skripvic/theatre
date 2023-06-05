@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nsu.skripnikova.theatre.controller.requests.StagingsRequest;
 import ru.nsu.skripnikova.theatre.entity.people.Employees;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Genres;
+import ru.nsu.skripnikova.theatre.entity.repertoire.Plays;
 import ru.nsu.skripnikova.theatre.entity.repertoire.Stagings;
 import ru.nsu.skripnikova.theatre.repository.repertoire.StagingsRepository;
+import ru.nsu.skripnikova.theatre.service.people.EmployeesService;
 
 import java.util.List;
 
@@ -15,8 +18,29 @@ public class StagingsService {
     @Autowired
     private StagingsRepository stagingsRepository;
 
+    @Autowired
+    private GenresService genresService;
+
+    @Autowired
+    private PlaysService playsService;
+
+//    @Autowired
+//    private EmployeesService employeesService;
+
     public List<Stagings> getAllStagings() {
         return stagingsRepository.getAllStagings();
+    }
+
+//    public Employees getStageWorkerById(Integer id){
+//        return employeesService.getEmployeesById(id);
+//    }
+
+    public List<Genres> getAllGenres() {
+        return genresService.getAllGenres();
+    }
+
+    public Plays getPlayById(Integer id){
+        return playsService.getPlayById(id);
     }
 
     public void addStagings (StagingsRequest stagingsRequest) {

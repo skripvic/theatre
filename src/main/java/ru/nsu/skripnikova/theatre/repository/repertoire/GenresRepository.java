@@ -13,6 +13,7 @@ public interface GenresRepository extends JpaRepository<Genres, Integer> {
     Genres getGenresByGenreId (Integer genreId);
 
     @Override
+    @Query(value = "SELECT * FROM genres ORDER BY genre_id", nativeQuery = true)
     List<Genres> findAll();
 
     @Query(value = "SELECT SEQUENCE_GENRES.nextval FROM dual", nativeQuery = true)

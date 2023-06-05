@@ -30,8 +30,11 @@
             </div>
         </div>
         <div class="row">
-            <label class="form-label" for="playId">Спектакль (id)</label>
-            <input th:field="*{playId}" type="number" id="playId" class="form-control form-control-lg"/>
+            <label class="form-label" for="stagingId">Постановка </label>
+            <select th:field="*{playId}" id="stagingId" class="form-control form-control-lg">
+                <option value="-1">Любой</option>
+                <option th:each="play : ${plays}" th:value="${play.playId}" th:text="${play.name}"></option>
+            </select>
         </div>
         <div class="row">
             <label class="form-label" for="fromDate">В промежутке от</label>

@@ -41,7 +41,7 @@
       <div class="row">
           <label class="form-label" for="directorId">Режиссер </label>
           <select th:field="*{directorId}" id="directorId" class="form-control form-control-lg">
-              <option value="-1">Любая</option>
+              <option value="-1">Любой</option>
               <option th:each="director : ${directors}" th:value="${director.employeeId}" th:text="${director.firstName} + ' ' + ${director.lastName}"></option>
           </select>
       </div>

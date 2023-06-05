@@ -40,6 +40,9 @@ public class PlaysController {
     public String getAllPlays(Model model) {
         List<Plays> playsList = playsService.getAllPlays();
         model.addAttribute("playsList", playsList);
+        model.addAttribute("genresList", playsService.getAllGenres());
+        model.addAttribute("authorsList", playsService.getAllAuthors());
+        model.addAttribute("ageCategories", playsService.getAllAgeCategories());
         return "repertoire/plays";
     }
 

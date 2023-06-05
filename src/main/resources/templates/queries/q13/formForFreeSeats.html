@@ -24,8 +24,10 @@
 <div class="card-body p-4 p-md-5" style="width: 75%; margin-top: 20px; margin-left: auto; margin-right: auto;">
     <form th:action="@{/queries/q13-2}" th:object="${FormForFreeSeatsRequest}" method="get">
         <div class="row">
-            <label class="form-label" for="showDateId"> Показ спектакля (id)</label>
-            <input th:field="*{showDateId}" type="number" id="showDateId" class="form-control form-control-lg"/>
+            <label class="form-label" for="showDateId">Спектакль </label>
+            <select th:field="*{showDateId}" id="showDateId" class="form-control form-control-lg">
+                <option th:each="showDate : ${showDates}" th:value="${showDate.showDateId}" th:text="${showDate.name} + ' ' + ${#strings.substring(showDate.showDate, 0, 16)}"></option>
+            </select>
         </div>
         <input type="submit" value="Поиск" class="btn  btn-outline-success"/>
     </form>

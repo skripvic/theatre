@@ -21,6 +21,7 @@ public class SeatsController {
     @GetMapping("queries/q13-1")
     public String getProfitFromTickets(Model model) {
         model.addAttribute("FormForFreeSeatsRequest", new FormForFreeSeatsRequest());
+        model.addAttribute("showDates", seatsService.getShowDatePlayRequest());
         return "queries/q13/formForFreeSeats";
     }
 

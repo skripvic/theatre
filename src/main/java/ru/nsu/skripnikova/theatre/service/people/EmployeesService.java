@@ -41,6 +41,10 @@ public class EmployeesService {
         return employeesRepository.getStageWorkersByTypeId(1);
     }
 
+    public Employees getEmployeesById(Integer id){
+        return employeesRepository.getEmployeesByEmployeeId(id);
+    }
+
     public List<Employees> getActors() {
         return employeesRepository.getEmployeesByPositionId(1);
     }

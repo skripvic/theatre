@@ -3,6 +3,7 @@ package ru.nsu.skripnikova.theatre.service.sales;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.nsu.skripnikova.theatre.controller.requests.FormForFreeSeatsRequest;
+import ru.nsu.skripnikova.theatre.controller.requests.ShowDatePlayRequest;
 import ru.nsu.skripnikova.theatre.entity.sales.Seats;
 import ru.nsu.skripnikova.theatre.repository.sales.SeatsRepository;
 
@@ -13,6 +14,9 @@ public class SeatsService {
 
     @Autowired
     private SeatsRepository seatsRepository;
+
+    @Autowired
+    private ShowDatesService showDatesService;
 
     public void addSeats (Seats seats) {
         seatsRepository.save(seats);
@@ -44,6 +48,10 @@ public class SeatsService {
             showDateId = -1;
         }
         return seatsRepository.getFreeSeatsByShowDateId(showDateId);
+    }
+
+    public List<ShowDatePlayRequest> getShowDatePlayRequest(){
+        return showDatesService.getShowDatePlayRequest();
     }
 
 }
